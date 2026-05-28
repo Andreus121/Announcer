@@ -1,0 +1,6 @@
+name: Announcer
+version: '${version}'
+
+main: cl.andreus.announcer.Announcer
+api-version: '26.1.2'
+load: POSTWORLD
