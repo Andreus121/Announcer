@@ -1,0 +1,20 @@
+groups:
+  #if you want create a message, copy this example an modify values
+  example1: #name of group, you can change it
+    name: "Example1" #name of group, you can change it
+    interval: 60 #time in seconds to send a message
+    random: false #if true, the plugin will send a random message from the list, if false, it will send the messages in order
+    #mensajes del grupo
+    messages: #list of messages, you can add as many as you want
+      - "Message 1"
+      - "Message 2"
+      - "Message 3"
+
+  example2:
+      name: "Example2"
+      interval: 120
+      random: true
+      messages:
+        - "Message A"
+        - "Message B"
+        - "Message C"
