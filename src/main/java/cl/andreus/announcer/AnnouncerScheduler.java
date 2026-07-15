@@ -88,4 +88,50 @@ public class AnnouncerScheduler {
             this.tasks.put(group.getName(),task);
         }
     }
+
+    //función para buscar un grupo de mensajes específico
+    public MessageGroup findGroupMessages(String name){
+        //revisar cada grupo de mensajes
+        for(MessageGroup group : this.groups){
+            //se encuentra el grupo de mensajes deseado
+            if(group.getName().equals(name)){
+                return group;
+            }
+        }
+        //no se encuentra el grupo de mensajes necesitado
+        return null;
+    }
+
+    //función para detener un scheduler específico
+    public void stopScheduler(String name){
+        ScheduledTask task = this.tasks.get(name);
+        task.cancel();
+    }
+
+    //función para reanudar una tarea (crea un ScheduledTask nuevo)
+    public void startScheduler(String name){
+        //cargar el scheduler global del sv
+        GlobalRegionScheduler globalScheduler = plugin.getServer().getGlobalRegionScheduler();
+
+        //buscar el grupo a reanudar
+        MessageGroup group = this.findGroupMessages(name);
+        //si el grupo no existe, termina la operación
+        if(group == null){ return;}
+
+        //crear un scheduler para cada grupo de mensajes
+        ScheduledTask task = globalScheduler.runAtFixedRate(plugin,
+                scheduledTask -> {
+                    //aquí va el código que se ejecuta cada vez
+                    //obtener el siguiente mensaje que toca mostrar
+                    Component message = Component.text(group.getCurrentMessage());
+                    //mostrar el mensaje
+                    Bukkit.broadcast(message);
+
+                },
+                20L, //delay inicial para ejecutar la tarea
+                20L * group.getInterval() //segundos indicados en el atributo del grupo
+        );
+
+        this.tasks.put(group.getName(),task);
+    }
 }

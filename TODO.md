@@ -3,16 +3,23 @@
 ## En progreso
 - [x] `loadGroups()` en `AnnouncerScheduler.java`
   - [x] Agregar verificación de null para `getConfigurationSection("groups")`
-  - [x] Usar la clave del grupo como nombre (se eliminará el campo `name` del yml)
+  - [x] Usar la clave del grupo como nombre
 - [x] Implementar schedulers en `AnnouncerScheduler`
   - [x] Corregir bug de shadowing en `createSchedulers()`
   - [x] Llamar `createSchedulers()` en el constructor
-
+- [x] Eliminar el campo `name` de `messages.yml`
+- [ ] Funciones en `AnnouncerScheduler`
+  - [x] Buscar un grupo de mensajes especifico por nombre
+  - [x] Detener un scheduler específico por nombre
+  - [x] Reanudar un scheduler específico por nombre
+  - [ ] Reload (recargar `messages.yml` y reiniciar schedulers)
+  
 ## Pendiente
-- [ ] Eliminar el campo `name` de `messages.yml`
-- [ ] Funciones para detener/reanudar un scheduler específico (para `/announcer stop` y `/announcer start`)
-- [ ] Implementar comandos en `AnnouncerCommands`
-- [ ] Implementar GUI para `/announcer messages`
+- [ ] Crear clase `AnnouncerCommands.java`
+  - [ ] `/announcer reload`
+  - [ ] `/announcer stop <grupo>`
+  - [ ] `/announcer start <grupo>`
+  - [ ] `/announcer messages` (GUI)
 - [ ] Clase principal `Announcer.java`
 - [ ] Migración automática de `messages.yml`
 - [ ] Permisos en `plugin.yml`
@@ -20,4 +27,5 @@
 
 ## Mejoras futuras
 - [ ] Soporte para colores con `&`
-- [ ] Editar configuración desde GUI
+- [ ] Implementar GUI para `/announcer messages`
+  - [ ] Editar configuración desde GUI
