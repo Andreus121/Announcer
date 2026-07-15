@@ -7,7 +7,8 @@ public class MessageGroup {
     private String name;
     private List<String> messages;
     private int interval; //tiempo en milisegundos (segundos)
-    private boolean random;
+    private boolean random; //indicar si el mensaje es random
+    private int currentIndex; //indice del mensaje siguiente a mostrar
 
     //constructor
     public MessageGroup(String name, int interval, boolean random){
@@ -15,6 +16,7 @@ public class MessageGroup {
         this.messages = new ArrayList<>(); //iniciar lista vacía
         this.interval = interval;
         this.random = random;
+        this.currentIndex = 0;
     }
 
     //getters
@@ -59,4 +61,20 @@ public class MessageGroup {
     public void removeMessage(String message){
         this.messages.remove(message);
     }
+
+    //Retorna el siguiente mensaje en salir por pantalla
+    public String getCurrentMessage(){
+        String message;
+        if(!this.isRandom()){
+            message = this.messages.get(this.currentIndex);
+            this.currentIndex++;
+            this.currentIndex = this.currentIndex % this.getMessagesCount();
+        }
+        else {
+            int index = (int) (Math.random()* this.getMessagesCount());
+            message = this.messages.get(index);
+        }
+        return message;
+    }
+
 }
