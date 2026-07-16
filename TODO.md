@@ -14,9 +14,10 @@
   - [x] Reanudar un scheduler específico por nombre
   - [x] Reload (recargar `messages.yml` y reiniciar schedulers)
 - [ ] Crear clase `AnnouncerCommands.java`
-  - [ ] `/announcer reload`
-  - [ ] `/announcer stop <grupo>`
-  - [ ] `/announcer start <grupo>`
+  - [x] `/announcer reload`
+  - [x] `/announcer stop <grupo>`
+  - [x] `/announcer start <grupo>`
+  - [ ] añadir cooldown a todos los comandos
   
 ## Pendiente
 - [ ] Clase principal `Announcer.java`
