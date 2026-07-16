@@ -84,22 +84,26 @@ public class AnnouncerScheduler {
     }
 
     //función para detener un scheduler específico
-    public void stopScheduler(String name){
+    public boolean stopScheduler(String name){
         ScheduledTask task = this.tasks.get(name);
+        if(task == null) return false;
         task.cancel();
+        this.tasks.remove(name);
+        return true;
     }
 
-    //función para reanudar una tarea (crea un ScheduledTask nuevo)
-    public void startScheduler(String name){
+    //función para reanudar una tarea (llama a crear un ScheduledTask nuevo)
+    public boolean startScheduler(String name){
         //buscar el grupo a reanudar
         MessageGroup group = this.findGroupMessages(name);
         //si el grupo no existe, termina la operación
-        if(group == null){ return;}
+        if(group == null){ return false;}
         //crear la task
         createScheduledTask(group);
+        return true;
     }
 
-    //función para crear un ScheduledTask especifico
+    //función agregar crear y agregar un ScheduledTask al objeto
     private void createScheduledTask(MessageGroup group){
         //cargar el scheduler global del sv
         GlobalRegionScheduler globalScheduler = plugin.getServer().getGlobalRegionScheduler();
