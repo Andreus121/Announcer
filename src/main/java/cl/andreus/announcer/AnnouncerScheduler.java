@@ -98,6 +98,8 @@ public class AnnouncerScheduler {
         MessageGroup group = this.findGroupMessages(name);
         //si el grupo no existe, termina la operación
         if(group == null){ return false;}
+        //ver si ya está reanudado (andando)
+        if(this.tasks.get(group.getName()) == null){ return false;}
         //crear la task
         createScheduledTask(group);
         return true;

@@ -25,6 +25,7 @@
 - [ ] README
 
 ## Mejoras futuras
+- [ ] Mensajes de configuraciones personalizados `messagesCommands.yml`
 - [ ] Soporte para colores con `&`
 - [ ] Implementar GUI para `/announcer messages`
   - [ ] Editar configuración desde GUI
