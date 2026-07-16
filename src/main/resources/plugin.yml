@@ -4,3 +4,14 @@ version: '${version}'
 main: cl.andreus.announcer.Announcer
 api-version: '26.1.2'
 load: POSTWORLD
+
+permissions:
+  announcer.announcer.start:
+    description: Permite usar /hello start
+    default: op
+  announcer.announcer.stop:
+    description: Permite usar /hello stop
+    default: op
+  announcer.announcer.reload:
+    description: Permite usar /hello reload
+    default: op

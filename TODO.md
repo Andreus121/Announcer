@@ -17,16 +17,18 @@
   - [x] `/announcer reload`
   - [x] `/announcer stop <grupo>`
   - [x] `/announcer start <grupo>`
-- [ ] Clase principal `Announcer.java`
+- [x] Clase principal `Announcer.java`
+- [x] Migración automática de `messages.yml`
 
 ## Pendiente
-- [ ] Migración automática de `messages.yml`
 - [ ] Permisos en `plugin.yml`
 - [ ] README
 
 ## Mejoras futuras
-- [ ] Mensajes de configuraciones personalizados `messagesCommands.yml`
-- [ ] Soporte para colores con `&`
+- [ ] Crear `config.yml`
+  - [ ] añadir cooldown a todos los comandos (personalizable desde config.yml)
+  - [ ] Mensajes de configuraciones personalizados `messagesCommands.yml`
+- [ ] Implementar soporte para colores con `&`
 - [ ] Implementar GUI para `/announcer messages`
   - [ ] Editar configuración desde GUI
-  - [ ] añadir cooldown a todos los comandos (personalizable desde config.yml)
+  

@@ -30,7 +30,7 @@ public class AnnouncerScheduler {
 
     //función encargada de cargar todos los grupos de mensajes
     public void loadGroups(){
-        //cargar el archivo de configuración
+        //cargar el archivo de mensajes
         File configFile = new File(plugin.getDataFolder(),"messages.yml");
         //pasar el archivo a formato yml
         YamlConfiguration messagesConfig = YamlConfiguration.loadConfiguration(configFile);
