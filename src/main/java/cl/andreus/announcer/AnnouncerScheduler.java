@@ -123,4 +123,21 @@ public class AnnouncerScheduler {
 
         this.tasks.put(group.getName(),task);
     }
+
+    //recarga todos los datos del plugin actualmente
+    public void reload(){
+        //cancelar todas las tareas activas
+        for(ScheduledTask task : this.tasks.values()){
+            task.cancel();
+        }
+        //limpiar las listas
+        this.tasks.clear();
+        this.groups.clear();
+        //recargar todo desde cero
+        this.loadGroups();
+        this.createSchedulers();
+    }
+
 }
+
+
