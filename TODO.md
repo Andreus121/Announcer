@@ -13,14 +13,13 @@
   - [x] Detener un scheduler específico por nombre
   - [x] Reanudar un scheduler específico por nombre
   - [x] Reload (recargar `messages.yml` y reiniciar schedulers)
-- [ ] Crear clase `AnnouncerCommands.java`
+- [x] Crear clase `AnnouncerCommands.java`
   - [x] `/announcer reload`
   - [x] `/announcer stop <grupo>`
   - [x] `/announcer start <grupo>`
-  - [ ] añadir cooldown a todos los comandos
-  
-## Pendiente
 - [ ] Clase principal `Announcer.java`
+
+## Pendiente
 - [ ] Migración automática de `messages.yml`
 - [ ] Permisos en `plugin.yml`
 - [ ] README
@@ -30,3 +29,4 @@
 - [ ] Soporte para colores con `&`
 - [ ] Implementar GUI para `/announcer messages`
   - [ ] Editar configuración desde GUI
+  - [ ] añadir cooldown a todos los comandos (personalizable desde config.yml)
