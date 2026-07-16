@@ -64,28 +64,9 @@ public class AnnouncerScheduler {
 
     //función para crear el scheduler de cada grupo de mensajes
     public void createSchedulers() {
-        //cargar el scheduler global del sv
-        GlobalRegionScheduler globalScheduler = plugin.getServer().getGlobalRegionScheduler();
-
         //crear un scheduler para cada grupo de mensajes
-        ScheduledTask task; //declarar la tarea
         for(MessageGroup group : this.groups){
-            //crear la tarea
-            task = globalScheduler.runAtFixedRate(plugin,
-                    scheduledTask -> {
-                        //aquí va el código que se ejecuta cada vez
-                        //obtener el siguiente mensaje que toca mostrar
-                        Component message = Component.text(group.getCurrentMessage());
-                        //mostrar el mensaje
-                        Bukkit.broadcast(message);
-
-                    },
-                    20L, //delay inicial para ejecutar la tarea
-                     20L * group.getInterval() //segundos indicados en el atributo del grupo
-            );
-
-            //agregar la tarea al Hash
-            this.tasks.put(group.getName(),task);
+            createScheduledTask(group);
         }
     }
 
@@ -110,13 +91,18 @@ public class AnnouncerScheduler {
 
     //función para reanudar una tarea (crea un ScheduledTask nuevo)
     public void startScheduler(String name){
-        //cargar el scheduler global del sv
-        GlobalRegionScheduler globalScheduler = plugin.getServer().getGlobalRegionScheduler();
-
         //buscar el grupo a reanudar
         MessageGroup group = this.findGroupMessages(name);
         //si el grupo no existe, termina la operación
         if(group == null){ return;}
+        //crear la task
+        createScheduledTask(group);
+    }
+
+    //función para crear un ScheduledTask especifico
+    private void createScheduledTask(MessageGroup group){
+        //cargar el scheduler global del sv
+        GlobalRegionScheduler globalScheduler = plugin.getServer().getGlobalRegionScheduler();
 
         //crear un scheduler para cada grupo de mensajes
         ScheduledTask task = globalScheduler.runAtFixedRate(plugin,
@@ -126,7 +112,6 @@ public class AnnouncerScheduler {
                     Component message = Component.text(group.getCurrentMessage());
                     //mostrar el mensaje
                     Bukkit.broadcast(message);
-
                 },
                 20L, //delay inicial para ejecutar la tarea
                 20L * group.getInterval() //segundos indicados en el atributo del grupo
