@@ -8,18 +8,17 @@
   - [x] Corregir bug de shadowing en `createSchedulers()`
   - [x] Llamar `createSchedulers()` en el constructor
 - [x] Eliminar el campo `name` de `messages.yml`
-- [ ] Funciones en `AnnouncerScheduler`
+- [x] Funciones en `AnnouncerScheduler`
   - [x] Buscar un grupo de mensajes especifico por nombre
   - [x] Detener un scheduler específico por nombre
   - [x] Reanudar un scheduler específico por nombre
-  - [ ] Reload (recargar `messages.yml` y reiniciar schedulers)
-  
-## Pendiente
+  - [x] Reload (recargar `messages.yml` y reiniciar schedulers)
 - [ ] Crear clase `AnnouncerCommands.java`
   - [ ] `/announcer reload`
   - [ ] `/announcer stop <grupo>`
   - [ ] `/announcer start <grupo>`
-  - [ ] `/announcer messages` (GUI)
+  
+## Pendiente
 - [ ] Clase principal `Announcer.java`
 - [ ] Migración automática de `messages.yml`
 - [ ] Permisos en `plugin.yml`
