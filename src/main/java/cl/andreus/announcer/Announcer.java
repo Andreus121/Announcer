@@ -13,6 +13,8 @@ public final class Announcer extends JavaPlugin {
     public void onEnable() {
         //lo que pasa cuando el plugin inicia
         try {
+            //guardar el messages.yml en la carpeta del plugin
+            saveResource("messages.yml",false);//false para que no reemplace si ya existe
             //crear el scheduler que controla los tiempos
             this.scheduler = new AnnouncerScheduler(this);//aquí carga el messages.yml
             //registrar el comando announcer en el servidor

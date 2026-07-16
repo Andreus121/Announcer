@@ -29,7 +29,7 @@ public class AnnouncerScheduler {
     }
 
     //función encargada de cargar todos los grupos de mensajes
-    public void loadGroups(){
+    public boolean loadGroups(){
         //cargar el archivo de mensajes
         File configFile = new File(plugin.getDataFolder(),"messages.yml");
         //pasar el archivo a formato yml
@@ -39,7 +39,7 @@ public class AnnouncerScheduler {
         ConfigurationSection groupsSection = messagesConfig.getConfigurationSection("groups");
         if (groupsSection == null) {
             plugin.getLogger().warning("Hubo un error al cargar el archivo messages.yml");
-            return;
+            return false;
         }
 
         //cargar la sección groups y cada nombre de grupos de esta misma
@@ -60,6 +60,7 @@ public class AnnouncerScheduler {
             //agregar el grupo a la lista
             this.groups.add(group);
         });
+        return true;
     }
 
     //función para crear el scheduler de cada grupo de mensajes
@@ -127,7 +128,7 @@ public class AnnouncerScheduler {
     }
 
     //recarga todos los datos del plugin actualmente
-    public void reload(){
+    public boolean reload(){
         //cancelar todas las tareas activas
         for(ScheduledTask task : this.tasks.values()){
             task.cancel();
@@ -136,8 +137,11 @@ public class AnnouncerScheduler {
         this.tasks.clear();
         this.groups.clear();
         //recargar todo desde cero
-        this.loadGroups();
+        if(!this.loadGroups()){//hubo un error al cargar los grupos
+            return false;
+        }
         this.createSchedulers();
+        return true;
     }
 
 }

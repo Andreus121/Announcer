@@ -27,14 +27,18 @@ public class AnnouncerCommands implements BasicCommand {
         //comprobar si ejecutó /announcer reload
         if(args.length == 1 && args[0].equals("reload")){
             //ejecutar el comando
-            this.scheduler.reload();
-            sender.sendPlainMessage("Grupo de mensajes actualizado");
+            boolean result = this.scheduler.reload();
+            if(result){ //se ejecutó bien
+                sender.sendPlainMessage("Grupo de mensajes actualizado");
+            }else {
+                sender.sendPlainMessage("Hubo un error al recargar el grupo de mensajes");
+            }
             return;
         }
         //comprobar si ejecutó /announcer stop nombre
         if(args.length == 2 && args[0].equals("stop")){
             //ejecutar el comando
-            boolean result = this.scheduler.stopScheduler(args[2]);
+            boolean result = this.scheduler.stopScheduler(args[1]);
             //indicarle al usuario el resultado
             if(result){ //éxito
                 sender.sendPlainMessage("El grupo de mensajes "+args[1]+" se pausó");
@@ -46,7 +50,7 @@ public class AnnouncerCommands implements BasicCommand {
         //comprobar si ejecutó /announcer start nombre
         if(args.length == 2 && args[0].equals("start")){
             //ejecutar el comando
-            boolean result = this.scheduler.startScheduler(args[2]);
+            boolean result = this.scheduler.startScheduler(args[1]);
             //indicarle al usuario el resultado
             if(result){ //éxito
                 sender.sendPlainMessage("El grupo de mensajes "+args[1]+" se reanudó");
