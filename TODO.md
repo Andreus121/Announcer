@@ -21,9 +21,7 @@
 - [x] Migración automática de `messages.yml`
 - [x] Permisos en `plugin.yml`
 - [x] Agregar relleno de comando `/announcer`
-- [ ] Arreglar bug, /announcer start no funciona
-
-## Pendiente
+- [x] Arreglar bug, /announcer start no funciona
 - [ ] README
 
 ## Mejoras futuras

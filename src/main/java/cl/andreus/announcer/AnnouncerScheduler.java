@@ -91,11 +91,13 @@ public class AnnouncerScheduler {
 
     //función para detener un scheduler específico
     public boolean stopScheduler(String name){
+        //verificar si ese grupo tiene un scheduler
         ScheduledTask task = this.tasks.get(name);
-        if(task == null) return false;
+        if(task == null) return false;//no tiene, retorna false (no se detuvo)
+        //si tiene, cancelalo y eliminalo
         task.cancel();
         this.tasks.remove(name);
-        return true;
+        return true;//detenido con exito
     }
 
     //función para reanudar una tarea (llama a crear un ScheduledTask nuevo)
@@ -105,7 +107,7 @@ public class AnnouncerScheduler {
         //si el grupo no existe, termina la operación
         if(group == null){ return false;}
         //ver si ya está reanudado (andando)
-        if(this.tasks.get(group.getName()) == null){ return false;}
+        if(this.tasks.get(group.getName()) != null){ return false;}
         //crear la task
         createScheduledTask(group);
         return true;
