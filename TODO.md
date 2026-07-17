@@ -22,7 +22,7 @@
 - [x] Permisos en `plugin.yml`
 - [x] Agregar relleno de comando `/announcer`
 - [x] Arreglar bug, /announcer start no funciona
-- [ ] README
+- [X] README
 
 ## Mejoras futuras
 - [ ] Crear `config.yml`
