@@ -3,10 +3,10 @@ package cl.andreus.announcer;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.command.CommandSender;
+import org.jspecify.annotations.Nullable;
 
 //imports de java
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class AnnouncerCommands implements BasicCommand {
     //guardar el padre para acceder a message.yml
@@ -17,6 +17,28 @@ public class AnnouncerCommands implements BasicCommand {
     public AnnouncerCommands(Announcer plugin, AnnouncerScheduler scheduler){
         this.plugin = plugin;
         this.scheduler = scheduler;
+    }
+
+    //cosas que muestra al escribir el comando
+    @Override
+    public Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args){
+        //sugerencias para el comando en la posicion 1
+        if(args.length == 1){
+            //retornar una lista de strings con las 3 opciones
+            return new ArrayList<String>(List.of("reload","start","stop"));
+        }
+        //si usa start o stop, mostrar los grupos de mensajes existentes
+        if(args.length == 2){
+            //crear una lista con todos los nombres de los grupos
+            List<String> namesGroups = new ArrayList<String>();
+            for(MessageGroup group : scheduler.getGroups()){
+                namesGroups.add(group.getName());
+            }
+            //retornar los nombres de los grupos
+            return namesGroups;
+        }
+        //retornar ninguna opción
+        return new ArrayList<String>();
     }
 
     //función a ejecutar si usan el comando

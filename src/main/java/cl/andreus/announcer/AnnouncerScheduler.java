@@ -19,6 +19,11 @@ public class AnnouncerScheduler {
     private List<MessageGroup> groups;
     private HashMap<String, ScheduledTask> tasks;
 
+    //getters
+    public List<MessageGroup> getGroups() {
+        return groups;
+    }
+
     //constructor
     public AnnouncerScheduler(Announcer plugin){
         this.plugin = plugin;//guardar el plugin (usar cosas de paper)
