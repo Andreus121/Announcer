@@ -7,4 +7,5 @@ messages: #{message_group}: place the name of message_group used in the command
   start_error: "El grupo de mensajes {message_group} no existe o ya está reanudado"
   unknown_command: "Comando no reconocido"
 cooldown: #this cooldown its for EVERY command in the plugin
-  announcer: 5 #seconds
+  message: "Debes esperar {cooldown} para usar el comando"
+  time: 3000 #miliseconds
