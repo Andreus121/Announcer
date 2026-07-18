@@ -54,7 +54,7 @@ public class AnnouncerCommands implements BasicCommand {
         if ((executor instanceof Player player)) {
             //calcular los cooldowns
             long currentTime = System.currentTimeMillis();
-            long cooldownTime = plugin.getConfig().getLong("cooldown",3000); //3 segundos por defecto
+            long cooldownTime = plugin.getConfig().getLong("cooldown.time",3000); //3 segundos por defecto
 
             //si el jugador ya usó el comando antes
             if(cooldowns.containsKey(player.getUniqueId())){
@@ -67,49 +67,78 @@ public class AnnouncerCommands implements BasicCommand {
                     int secondsLeft = (int) ((cooldownTime - (currentTime-lasUsed))/1000);
                     message = message.replace("{cooldown}", String.valueOf(secondsLeft));
                     sender.sendPlainMessage(message);
+                    //cancelar el comando, terminar la funcion
+                    return;
                 }
             }
+
+            //ya pasó el cooldown definido, ejecutar comando
+            //antes de ejecutar comando, actualizar la última vez que uso el comando, poner hora actual
+            cooldowns.put(player.getUniqueId(),currentTime);
         }
 
         //ya no tiene cooldown o no es un usuario el que ejecutó el comando
 
+        //declarar variable para el mensaje de salida
+        String message;
 
         //comprobar si ejecutó /announcer reload
         if(args.length == 1 && args[0].equals("reload")){
             //ejecutar el comando
             boolean result = this.scheduler.reload();
             if(result){ //se ejecutó bien
-                sender.sendPlainMessage("Grupo de mensajes actualizado");
+                //extraer el mensaje del config.yml o usar el default
+                message = plugin.getConfig().getString("messages.reload_success","Grupo de mensajes actualizado");
             }else {
-                sender.sendPlainMessage("Hubo un error al recargar el grupo de mensajes");
+                //extraer el mensaje del config.yml o usar el default
+                message = plugin.getConfig().getString("messages.reload_error","Hubo un error al recargar el grupo de mensajes");
             }
+            //mandar mensaje al que ejecutó el comando
+            sender.sendPlainMessage(message);
             return;
         }
+
         //comprobar si ejecutó /announcer stop nombre
         if(args.length == 2 && args[0].equals("stop")){
             //ejecutar el comando
             boolean result = this.scheduler.stopScheduler(args[1]);
             //indicarle al usuario el resultado
             if(result){ //éxito
-                sender.sendPlainMessage("El grupo de mensajes "+args[1]+" se pausó");
+                //extraer el mensaje del config.yml o usar el default
+                message = plugin.getConfig().getString("messages.stop_success","El grupo de mensajes {message_group} se pausó");
             } else { //error
-                sender.sendPlainMessage("El grupo de mensajes "+args[1]+" no existe o ya está pausado");
+                //extraer el mensaje del config.yml o usar el default
+                message = plugin.getConfig().getString("messages.stop_error","El grupo de mensajes {message_group} no existe o ya está pausado");
             }
+            //reemplazar {message_group} con el nombre del grupo usado al llamar el comando
+            message = message.replace("{message_group}",args[1]);
+            //mandar mensaje al que ejecutó el comando
+            sender.sendPlainMessage(message);
             return;
         }
+
         //comprobar si ejecutó /announcer start nombre
         if(args.length == 2 && args[0].equals("start")){
             //ejecutar el comando
             boolean result = this.scheduler.startScheduler(args[1]);
             //indicarle al usuario el resultado
             if(result){ //éxito
-                sender.sendPlainMessage("El grupo de mensajes "+args[1]+" se reanudó");
+                //extraer el mensaje del config.yml o usar el default
+                message = plugin.getConfig().getString("messages.start_success","El grupo de mensajes {message_group} se reanudó");
             } else { //error
-                sender.sendPlainMessage("El grupo de mensajes "+args[1]+" no existe o ya está reanudado");
+                //extraer el mensaje del config.yml o usar el default
+                message = plugin.getConfig().getString("messages.start_error","El grupo de mensajes {message_group} no existe o ya está reanudado");
             }
+            //reemplazar {message_group} con el nombre del grupo usado al llamar el comando
+            message = message.replace("{message_group}",args[1]);
+            //mandar mensaje al que ejecutó el comando
+            sender.sendPlainMessage(message);
             return;
         }
-        sender.sendPlainMessage("Comando no reconocido");
-    }
 
+        //el comando no se reconoce o no existe
+        //extraer el mensaje del config.yml o usar el default
+        message = plugin.getConfig().getString("messages.unknown_command","Comando no reconocido");
+        sender.sendPlainMessage(message);
+    }
 }

@@ -23,9 +23,9 @@
 - [x] Agregar relleno de comando `/announcer`
 - [x] Arreglar bug, /announcer start no funciona
 - [X] README
-- [ ] Crear `config.yml`
-  - [ ] añadir cooldown a todos los comandos (personalizable desde config.yml)
-  - [ ] Mensajes de configuraciones personalizados `messagesCommands.yml`
+- [x] Crear `config.yml`
+  - [x] añadir cooldown a todos los comandos (personalizable desde config.yml)
+  - [x] Mensajes de configuraciones personalizados `messagesCommands.yml`
 
 ## Mejoras futuras
 - [ ] Implementar soporte para colores con `&`
