@@ -26,6 +26,9 @@
 - [x] Crear `config.yml`
   - [x] añadir cooldown a todos los comandos (personalizable desde config.yml)
   - [x] Mensajes de configuraciones personalizados `messagesCommands.yml`
+  
+## Pendiente
+- [ ] Separar /announcer reload message y /announcer reload config
 
 ## Mejoras futuras
 - [ ] Implementar soporte para colores con `&`
