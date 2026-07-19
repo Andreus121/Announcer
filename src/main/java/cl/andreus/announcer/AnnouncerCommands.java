@@ -31,7 +31,7 @@ public class AnnouncerCommands implements BasicCommand {
             return new ArrayList<String>(List.of("reload","start","stop"));
         }
         //si usa start o stop, mostrar los grupos de mensajes existentes
-        if(args.length == 2){
+        if(args.length == 2 && (args[0].equals("start") || args[0].equals("stop"))){
             //crear una lista con todos los nombres de los grupos
             List<String> namesGroups = new ArrayList<String>();
             for(MessageGroup group : scheduler.getGroups()){
@@ -39,6 +39,11 @@ public class AnnouncerCommands implements BasicCommand {
             }
             //retornar los nombres de los grupos
             return namesGroups;
+        }
+        //si usa /announcer reload, mostrar config,messages y all
+        if(args.length == 2 && args[0].equals("reload")){
+            //retornar una lista de strings con las 3 opciones
+            return new ArrayList<String>(List.of("all","config","messages"));
         }
         //retornar ninguna opción
         return new ArrayList<String>();
@@ -83,19 +88,48 @@ public class AnnouncerCommands implements BasicCommand {
         String message;
 
         //comprobar si ejecutó /announcer reload
-        if(args.length == 1 && args[0].equals("reload")){
-            //ejecutar el comando
-            boolean result = this.scheduler.reload();
-            if(result){ //se ejecutó bien
-                //extraer el mensaje del config.yml o usar el default
-                message = plugin.getConfig().getString("messages.reload_success","Grupo de mensajes actualizado");
-            }else {
-                //extraer el mensaje del config.yml o usar el default
-                message = plugin.getConfig().getString("messages.reload_error","Hubo un error al recargar el grupo de mensajes");
+        if(args.length >= 1 && args[0].equals("reload")) {
+            //si usó solo /announcer reload o /announcer reload all
+            if (args.length == 1 || (args.length==2 && args[1].equals("all"))) {
+                //reload de los mensajes
+                boolean result = this.scheduler.reload();
+                //reload del config
+                plugin.reloadConfig();
+                if (result) { //se ejecutó bien
+                    //extraer el mensaje del config.yml o usar el default
+                    message = plugin.getConfig().getString("messages.reload_success", "Se recargó messages.yml y config.yml");
+                } else {
+                    //extraer el mensaje del config.yml o usar el default
+                    message = plugin.getConfig().getString("messages.reload_error", "Hubo un error al recargar messages.yml");
+                }
+                //mandar mensaje al que ejecutó el comando
+                sender.sendPlainMessage(message);
+                return;
             }
-            //mandar mensaje al que ejecutó el comando
-            sender.sendPlainMessage(message);
-            return;
+            //si usó /announcer reload config
+            else if (args.length == 2 && args[1].equals("config")) {
+                //recargar el config y prepara el mensaje
+                plugin.reloadConfig();
+                message = plugin.getConfig().getString("messages.reload_config", "Se recargó config.yml");
+                //mandar mensaje al que ejecutó el comando
+                sender.sendPlainMessage(message);
+                return;
+            }
+            //si usó /announcer reload messages
+            else if (args.length == 2 && args[1].equals("messages")) {
+                //reload de los mensajes
+                boolean result = this.scheduler.reload();
+                if(result){ //se ejecutó bien
+                    //extraer el mensaje del config.yml o usar el default
+                    message = plugin.getConfig().getString("messages.reload_messages_success", "Se recargó messages.yml");
+                } else {
+                    //extraer el mensaje del config.yml o usar el default
+                    message = plugin.getConfig().getString("messages.reload_messages_error", "Hubo un error al recargar messages.yml");
+                }
+                //mandar mensaje al que ejecutó el comando
+                sender.sendPlainMessage(message);
+                return;
+            }
         }
 
         //comprobar si ejecutó /announcer stop nombre

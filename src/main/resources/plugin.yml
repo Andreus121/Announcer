@@ -7,11 +7,20 @@ load: POSTWORLD
 
 permissions:
   announcer.announcer.start:
-    description: Permite usar /hello start
+    description: Reanuda un grupo de mensajes
     default: op
   announcer.announcer.stop:
-    description: Permite usar /hello stop
+    description: Detiene un grupo de mensajes (no muestra mensajes en el chat)
     default: op
   announcer.announcer.reload:
-    description: Permite usar /hello reload
+    description: Recarga config.yml y messages.yml
+    default: op
+  announcer.announcer.reload.all:
+      description: Recarga config.yml y messages.yml
+      default: op
+  announcer.announcer.reload.config:
+    description: Recarga config.yml
+    default: op
+  announcer.announcer.reload.messages:
+    description: Recarga messages.yml
     default: op

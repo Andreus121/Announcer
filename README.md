@@ -4,13 +4,18 @@ paper plugin that broadcasts configurable messages to players at set intervals.
 
 ## Commands
 
-| Command                        | Description                             | Permissions |
-|--------------------------------|-----------------------------------------|-------------|
-| `/announcer reload`            | Reload the messages from messages.yml   | op          |
+| Command                            | Description                             | Permissions |
+|------------------------------------|-----------------------------------------|-------------|
+| `/announcer reload`                | Reload messages.yml and config.yml      | op          |
+| `/announcer reload all`            | Reload messages.yml and config.yml      | op          |
+| `/announcer reload config`         | Reload only config.yml                  | op          |
+| `/announcer reload messages`       | Reload only messages.yml                | op          |
 | `/announcer stop <MessagesGroup>`  | Stop to send message of a MessageGroup  | op          |
 | `/announcer start <MessagesGroup>` | Start to send message of a MessageGroup | op          |
 
 ## Configuration
+
+### Messages
 
 After the first run, a `messages.yml` will be generated in `plugins/Announcer/". In this file you can create your own messages and configurate them
 
@@ -34,8 +39,26 @@ groups:
       - "Message B"
       - "Message C"
 ```
+### Config
 
-> Coming soon: a config.yml file to customize the messages shown to the OP when using the commands.
+After the first run, a `config.yml` will be generated in `plugins/Announcer/". In this file you can custom the messages for the commands
+
+```yaml
+messages: #{message_group}: place the name of message_group used in the command
+  reload_success: "Se recargó messages.yml y config.yml"
+  reload_error: "Hubo un error al recargar messages.yml"
+  reload_config: "Se recargó config.yml"
+  reload_messages_success: "Se recargó messages.yml"
+  reload_messages_error: "Hubo un error al recargar messages.yml"
+  stop_success: "El grupo de mensajes {message_group} se pausó"
+  stop_error: "El grupo de mensajes {message_group} no existe o ya está pausado"
+  start_success: "El grupo de mensajes {message_group} se reanudó"
+  start_error: "El grupo de mensajes {message_group} no existe o ya está reanudado"
+  unknown_command: "Comando no reconocido"
+cooldown: #this cooldown its for EVERY command in the plugin
+  message: "Debes esperar {cooldown} para usar el comando"
+  time: 3000 #milliseconds
+```
 
 ## Download
 

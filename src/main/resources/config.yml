@@ -1,6 +1,9 @@
 messages: #{message_group}: place the name of message_group used in the command
-  reload_success: "Grupo de mensajes actualizado"
-  reload_error: "Hubo un error al recargar el grupo de mensajes"
+  reload_success: "Se recargó messages.yml y config.yml"
+  reload_error: "Hubo un error al recargar messages.yml"
+  reload_config: "Se recargó config.yml"
+  reload_messages_success: "Se recargó messages.yml"
+  reload_messages_error: "Hubo un error al recargar messages.yml"
   stop_success: "El grupo de mensajes {message_group} se pausó"
   stop_error: "El grupo de mensajes {message_group} no existe o ya está pausado"
   start_success: "El grupo de mensajes {message_group} se reanudó"
