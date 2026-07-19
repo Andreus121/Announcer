@@ -2,8 +2,6 @@ package cl.andreus.announcer;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.IOException;
-
 public final class Announcer extends JavaPlugin {
 
     //guardar el scheduler como atributo

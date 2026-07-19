@@ -6,9 +6,9 @@ paper plugin that broadcasts configurable messages to players at set intervals.
 
 | Command                        | Description                             | Permissions |
 |--------------------------------|-----------------------------------------|-------------|
-| `/hello reload`                | Reload the messages from messages.yml   | op          |
-| `/hello stop <MessagesGroup>`  | Stop to send message of a MessageGroup  | op          |
-| `/hello start <MessagesGroup>` | Start to send message of a MessageGroup | op          |
+| `/announcer reload`            | Reload the messages from messages.yml   | op          |
+| `/announcer stop <MessagesGroup>`  | Stop to send message of a MessageGroup  | op          |
+| `/announcer start <MessagesGroup>` | Start to send message of a MessageGroup | op          |
 
 ## Configuration
 
