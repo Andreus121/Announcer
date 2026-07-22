@@ -27,9 +27,4 @@
   - [x] añadir cooldown a todos los comandos (personalizable desde config.yml)
   - [x] Mensajes de configuraciones personalizados `messagesCommands.yml`
 - [x] Separar /announcer reload message y /announcer reload config
-
-## Mejoras futuras
-- [ ] Implementar soporte para colores con `&`
-- [ ] Implementar GUI para `/announcer messages`
-  - [ ] Editar configuración desde GUI
-  
+- [x] Soporte con formato MiniMessage (colores hexadecimal, links, etc) <algo>
